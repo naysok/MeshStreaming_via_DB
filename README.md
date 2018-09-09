@@ -11,6 +11,7 @@ Grasshopper から データベースにアクセスするためのアドオン�
 
 ### index  
 - 環境  
+- psycopg2  
 - Slingshot  
 - テーブル構成  
 
@@ -41,6 +42,58 @@ ghCPython で、汎用の Python ライブラリ（モジュール？）が~~う
 置く場所はここ  
 C:\Users\xxx\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\IronPython (xxx)\settings\lib  
 
+
+
+---  
+
+
+### psycopg2  
+
+普通に Python 環境下で書くのと同じ  
+conn.commit() が必要  
+
+
+```python
+import psycopg2
+
+def get_connection():
+    connect_str = "dbname='postgres' user='postgres' host='localhost' password='postgres'"
+    return psycopg2.connect(connect_str)
+
+conn = get_connection()
+cur = conn.cursor()
+
+if TF == True:
+
+
+    # SELECT  
+    sql_s = "SELECT * FROM " + table_name + ";"
+    # debug = sql_s
+    cur.execute(sql_s)
+    rows = cur.fetchall()
+    _output = rows
+
+
+    # DELETE  
+    sql_del = "DELETE FROM " + table_name + ";"
+    # debug = sql_del
+    cur.execute(sql_del)
+    conn.commit() # 大事！！
+
+
+    # INSERT  
+    for i in range(len(id)):
+        sql_insert = "INSERT INTO " + table_name + " (mesh_id, pt0, pt1, pt2) " + " VALUES (" +str(i)+ "," + str(pt0[i]) + "," + str(pt1[i]) + "," + str(pt2[i]) + " );"
+        # debug = sql_insert
+        cur.execute(sql_insert)
+        conn.commit() # 大事！！
+
+
+cur.close()
+conn.close()
+
+
+```
 
 
 ---  

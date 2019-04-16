@@ -43,6 +43,10 @@ ghCPython で、汎用の Python ライブラリ（モジュール？）が~~う
 置く場所はここ  
 C:\Users\xxx\AppData\Roaming\McNeel\Rhinoceros\5.0\Plug-ins\IronPython (xxx)\settings\lib  
 
+違うかも。  
+好きな Python インタプリタのパスを通せば良い。  
+anaconda とか。3系も可。  
+
 
 
 ---  
